@@ -1,0 +1,60 @@
+<!-- pages/download-history/download-history.wxml -->
+<view class="container">
+  <!-- 加载中 -->
+  <view wx:if="{{isLoading && downloadLogs.length === 0}}" class="loading-wrap">
+    <view class="loading"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 下载记录列表 -->
+  <view wx:if="{{downloadLogs.length > 0}}" class="log-list">
+    <view wx:for="{{getGroupedLogs()}}" wx:key="date" class="log-group">
+      <!-- 日期分组标题 -->
+      <view class="group-header">
+        <text class="group-date">{{item.date}}</text>
+      </view>
+
+      <!-- 下载项 -->
+      <view
+        wx:for="{{item.items}}"
+        wx:key="_id"
+        class="log-item"
+        data-id="{{item.resourceId}}"
+        bindtap="goToDetail"
+      >
+        <image class="item-cover" src="{{item.coverImage}}" mode="aspectFill" />
+        <view class="item-info">
+          <text class="item-title">{{item.title}}</text>
+          <view class="item-meta">
+            <text class="item-category">{{item.category}}</text>
+            <text class="item-time">{{formatDate(item.createTime)}}</text>
+          </view>
+        </view>
+        <view class="item-action">
+          <text class="action-icon">再次下载</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">
+      <text wx:if="{{!isLoading}}">加载更多</text>
+      <view wx:if="{{isLoading}}" class="loading-inline">
+        <view class="loading-dot"></view>
+        <text>加载中...</text>
+      </view>
+    </view>
+
+    <view wx:if="{{!hasMore && downloadLogs.length > 0}}" class="no-more">
+      <text>没有更多下载记录了</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{isEmpty && !isLoading}}" class="empty-state">
+    <image class="empty-icon" src="/images/empty-download.png" mode="aspectFit" />
+    <text class="empty-title">暂无下载记录</text>
+    <text class="empty-hint">快去下载喜欢的资源吧</text>
+    <button class="empty-btn" bindtap="goToIndex">去首页看看</button>
+  </view>
+</view>

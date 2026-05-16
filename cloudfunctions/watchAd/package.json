@@ -1,0 +1,9 @@
+{
+  "name": "watchAd",
+  "version": "1.0.0",
+  "description": "观看广告获得下载次数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

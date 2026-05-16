@@ -1,0 +1,154 @@
+<!-- pages/resource-detail/resource-detail.wxml - 资源详情页 -->
+<view class="detail-page">
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="detail-content" wx:if="{{resource && !loading}}">
+    <!-- 顶部封面 -->
+    <view class="detail-header">
+      <image class="header-bg" src="{{resource.cover}}" mode="aspectFill" />
+      <view class="header-overlay">
+        <view class="back-btn" bindtap="navigateBack">
+          <image src="/images/back-white.png" />
+        </view>
+        <view class="share-btn" open-type="share">
+          <image src="/images/share-white.png" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 资源信息卡片 -->
+    <view class="info-card">
+      <view class="resource-title">
+        <text class="title">{{resource.name}}</text>
+        <view class="tag-row">
+          <text class="tag category-tag">{{resource.category}}</text>
+          <text class="tag version-tag">v{{resource.version}}</text>
+        </view>
+      </view>
+      
+      <!-- 数据统计 -->
+      <view class="stats-row">
+        <view class="stat-item">
+          <text class="stat-value">{{resource.downloadCountText}}</text>
+          <text class="stat-label">下载量</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-value">{{resource.rating}}</text>
+          <text class="stat-label">评分</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-value">{{downloadCount}}</text>
+          <text class="stat-label">我的次数</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 资源详情 -->
+    <view class="detail-section">
+      <view class="section-title">
+        <text>资源详情</text>
+      </view>
+      <view class="detail-content-box">
+        <view class="detail-row">
+          <text class="detail-label">文件大小</text>
+          <text class="detail-value">{{resource.size}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-label">版本号</text>
+          <text class="detail-value">{{resource.version}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-label">语言</text>
+          <text class="detail-value">{{resource.language}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-label">运行环境</text>
+          <text class="detail-value">{{resource.system}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 资源简介 -->
+    <view class="intro-section">
+      <view class="section-title">
+        <text>资源简介</text>
+      </view>
+      <view class="intro-content">
+        <text>{{resource.description}}</text>
+      </view>
+      <view class="tag-list">
+        <text class="item-tag" wx:for="{{resource.tags}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar">
+      <view class="count-display">
+        <view class="count-icon">
+          <image src="/images/download-icon.png" />
+        </view>
+        <view class="count-info">
+          <text class="count-label">剩余次数</text>
+          <text class="count-value">{{downloadCount}}</text>
+        </view>
+      </view>
+      
+      <view class="action-btns">
+        <view class="action-btn watch-ad" bindtap="handleWatchAd">
+          <image class="btn-icon" src="/images/ad-white.png" />
+          <text>看广告</text>
+          <text class="btn-tip">{{adWatchedToday}}/10</text>
+        </view>
+        <view class="action-btn download-btn" bindtap="handleDownload">
+          <image class="btn-icon" src="/images/download-white.png" />
+          <text>立即下载</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 余额不足弹窗 -->
+  <view class="modal-mask" wx:if="{{showBalanceModal}}" bindtap="closeBalanceModal">
+    <view class="balance-modal" catchtap="preventBubble">
+      <view class="modal-header">
+        <image class="modal-icon" src="/images/coin-empty.png" />
+        <text class="modal-title">下载次数不足</text>
+        <text class="modal-subtitle">当前剩余 <text class="highlight">{{downloadCount}}</text> 次下载次数</text>
+      </view>
+      
+      <view class="modal-body">
+        <text class="body-title">获取更多下载次数</text>
+        
+        <view class="option-item" bindtap="handleWatchAd">
+          <view class="option-icon ad">
+            <image src="/images/ad-icon.png" />
+          </view>
+          <view class="option-info">
+            <text class="option-title">观看激励视频广告</text>
+            <text class="option-desc">立即获得 1 次下载次数</text>
+          </view>
+        </view>
+        
+        <view class="option-item" bindtap="goToSignin">
+          <view class="option-icon signin">
+            <image src="/images/signin-icon.png" />
+          </view>
+          <view class="option-info">
+            <text class="option-title">每日签到</text>
+            <text class="option-desc">连续签到最高得 3 次</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="modal-btn primary" bindtap="handleWatchAd">观看广告获取次数</button>
+      </view>
+    </view>
+  </view>
+</view>

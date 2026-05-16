@@ -1,0 +1,104 @@
+<!-- pages/search/search.wxml -->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <icon type="search" size="16" color="#999" class="search-icon" />
+      <input
+        type="text"
+        placeholder="搜索资源"
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+        class="search-input"
+      />
+      <icon
+        wx:if="{{searchKeyword}}"
+        type="clear"
+        size="14"
+        color="#999"
+        class="clear-icon"
+        bindtap="clearInput"
+      />
+    </view>
+    <button class="search-btn" bindtap="onSearchConfirm">搜索</button>
+  </view>
+
+  <!-- 搜索历史 -->
+  <view wx:if="{{!searchKeyword && historyKeywords.length > 0}}" class="history-section">
+    <view class="section-header">
+      <text class="section-title">搜索历史</text>
+      <text class="clear-btn" bindtap="clearHistory">清除</text>
+    </view>
+    <view class="history-tags">
+      <text
+        wx:for="{{historyKeywords}}"
+        wx:key="index"
+        class="history-tag"
+        data-keyword="{{item}}"
+        bindtap="onHotKeywordTap"
+      >{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 热门搜索 -->
+  <view wx:if="{{!searchKeyword}}" class="hot-section">
+    <view class="section-header">
+      <text class="section-title">热门搜索</text>
+    </view>
+    <view class="hot-tags">
+      <text
+        wx:for="{{hotKeywords}}"
+        wx:key="index"
+        class="hot-tag"
+        data-keyword="{{item}}"
+        bindtap="onHotKeywordTap"
+      >{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view wx:if="{{isLoading}}" class="loading-wrap">
+    <view class="loading"></view>
+    <text class="loading-text">搜索中...</text>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view wx:if="{{searchResults.length > 0}}" class="results-section">
+    <view class="results-count">找到 {{searchResults.length}} 个相关资源</view>
+    <view class="resource-list">
+      <view
+        wx:for="{{searchResults}}"
+        wx:key="id"
+        class="resource-card"
+        data-id="{{item._id}}"
+        bindtap="goToDetail"
+      >
+        <image class="resource-cover" src="{{item.coverImage}}" mode="aspectFill" />
+        <view class="resource-info">
+          <text class="resource-title">{{item.title}}</text>
+          <text class="resource-desc">{{item.description}}</text>
+          <view class="resource-meta">
+            <text class="resource-category">{{item.category}}</text>
+            <text class="resource-size">{{item.fileSize}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多提示 -->
+    <view wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">
+      <text>加载更多</text>
+    </view>
+    <view wx:if="{{!hasMore && searchResults.length > 0}}" class="no-more">
+      <text>没有更多了</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{isEmpty && searchKeyword && !isLoading}}" class="empty-state">
+    <image class="empty-icon" src="/images/empty-search.png" mode="aspectFit" />
+    <text class="empty-text">未找到相关资源</text>
+    <text class="empty-hint">换个关键词试试吧</text>
+  </view>
+</view>

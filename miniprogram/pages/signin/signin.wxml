@@ -1,0 +1,153 @@
+<!-- pages/signin/signin.wxml - 签到页 -->
+<view class="signin-page">
+  <!-- 顶部区域 -->
+  <view class="header-bg">
+    <view class="header-content">
+      <!-- 连续签到天数 -->
+      <view class="streak-section">
+        <text class="streak-label">连续签到</text>
+        <view class="streak-value-row">
+          <text class="streak-value">{{signStreak}}</text>
+          <text class="streak-unit">天</text>
+        </view>
+      </view>
+
+      <!-- 签到状态卡片 -->
+      <view class="status-card {{isSignedToday ? 'signed' : ''}}">
+        <view class="status-left">
+          <view class="status-icon">
+            <image src="{{isSignedToday ? '/images/check-white.png' : '/images/calendar-green.png'}}" />
+          </view>
+          <view class="status-info">
+            <text class="status-title">{{isSignedToday ? '今日已完成' : '今日待签到'}}</text>
+            <text class="status-tip">{{isSignedToday ? '明天再来领取奖励' : '点击下方按钮签到'}}</text>
+          </view>
+        </view>
+        <view class="status-badge" wx:if="{{isSignedToday}}">
+          <image src="/images/check-small.png" />
+        </view>
+      </view>
+
+      <!-- 看广告领次数卡片 -->
+      <view class="ad-banner" bindtap="handleWatchAd">
+        <view class="ad-left">
+          <view class="ad-icon">
+            <image src="/images/ad-icon.png" />
+          </view>
+          <view class="ad-info">
+            <text class="ad-title">看广告领次数</text>
+            <text class="ad-tip">今日已看 {{adWatchedToday}}/10 次</text>
+          </view>
+        </view>
+        <view class="ad-btn">
+          <text>去观看</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-section">
+    <!-- 本周签到日历 -->
+    <view class="calendar-card">
+      <view class="card-header">
+        <text class="card-title">本周签到</text>
+        <text class="card-tip">连续签到奖励翻倍</text>
+      </view>
+      
+      <view class="week-calendar">
+        <view class="week-day" wx:for="{{weekStatus}}" wx:key="index">
+          <text class="day-label">{{['一','二','三','四','五','六','日'][index]}}</text>
+          <view class="day-circle {{item === 1 ? 'signed' : ''}} {{index === 6 ? 'today' : ''}}">
+            <image wx:if="{{item === 1}}" src="/images/check-small.png" />
+            <view wx:if="{{index === 6 && item === 0 && !isSignedToday}}" class="today-dot"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 奖励规则 -->
+    <view class="rewards-card">
+      <view class="card-header">
+        <text class="card-title">签到奖励</text>
+      </view>
+      
+      <view class="rewards-list">
+        <view 
+          class="reward-item {{signStreak >= item.day ? 'completed' : ''}}"
+          wx:for="{{rewards}}"
+          wx:key="day"
+        >
+          <view class="reward-day">
+            <text>第{{item.day}}天</text>
+          </view>
+          <view class="reward-icon">
+            <image wx:if="{{signStreak >= item.day}}" src="/images/check-small.png" />
+            <text wx:else>+</text>
+          </view>
+          <view class="reward-value">
+            <text class="value">+{{item.reward}}</text>
+            <text class="unit">次</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 奖励说明 -->
+      <view class="reward-tips">
+        <view class="tip-item">
+          <view class="tip-dot level-1"></view>
+          <text>连续1-3天：每日 +1 次下载</text>
+        </view>
+        <view class="tip-item">
+          <view class="tip-dot level-2"></view>
+          <text>连续4-6天：每日 +2 次下载</text>
+        </view>
+        <view class="tip-item">
+          <view class="tip-dot level-3"></view>
+          <text>连续7天+：每日 +3 次下载</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 签到按钮 -->
+  <view class="action-section">
+    <button 
+      class="signin-btn {{isSignedToday ? 'disabled' : ''}}" 
+      bindtap="handleSignin"
+      disabled="{{isSignedToday}}"
+    >
+      <image class="btn-icon" src="{{isSignedToday ? '/images/check-big.png' : '/images/signin-icon.png'}}" />
+      <text>{{isSignedToday ? '今日已签到' : '立即签到'}}</text>
+    </button>
+  </view>
+
+  <!-- 签到成功弹窗 -->
+  <view class="modal-mask" wx:if="{{showSuccessModal}}" bindtap="closeModal">
+    <view class="success-modal" catchtap="preventBubble">
+      <view class="modal-header">
+        <view class="success-icon-wrap">
+          <image class="success-icon" src="/images/signin-success.png" />
+        </view>
+      </view>
+      
+      <view class="modal-body">
+        <text class="success-title">签到成功!</text>
+        <text class="success-subtitle">已连续签到 {{signStreak}} 天</text>
+        
+        <view class="reward-display">
+          <text class="reward-label">今日签到奖励</text>
+          <view class="reward-amount">
+            <text class="plus">+</text>
+            <text class="amount">{{todayReward}}</text>
+            <text class="unit">次下载</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="modal-footer">
+        <button class="modal-btn" bindtap="closeModal">我知道了</button>
+      </view>
+    </view>
+  </view>
+</view>

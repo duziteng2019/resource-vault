@@ -1,0 +1,95 @@
+<!-- pages/index/index.wxml - 首页结构 -->
+<view class="index-page">
+  <!-- 搜索栏 -->
+  <view class="search-section">
+    <view class="search-bar">
+      <image class="search-icon" src="/images/search.png" />
+      <input 
+        class="search-input" 
+        placeholder="搜索软件资源..." 
+        placeholder-class="search-placeholder"
+        bindconfirm="onSearch"
+      />
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-section">
+    <!-- 分类快捷入口 -->
+    <view class="category-section">
+      <view class="section-header">
+        <text class="section-title">资源分类</text>
+        <view class="more-btn" bindtap="goToCategory">
+          <text>查看全部</text>
+          <image class="more-arrow" src="/images/arrow-gray.png" />
+        </view>
+      </view>
+      
+      <view class="category-grid">
+        <view 
+          class="category-item" 
+          wx:for="{{categories}}" 
+          wx:key="id"
+          bindtap="goToCategory"
+          data-id="{{item.id}}"
+          data-name="{{item.name}}"
+        >
+          <view class="category-icon" style="background: {{item.color}}">
+            <image src="/images/{{item.icon}}.png" />
+          </view>
+          <text class="category-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 推荐资源 -->
+    <view class="resource-section">
+      <view class="section-header">
+        <text class="section-title">热门推荐</text>
+        <view class="more-btn" bindtap="goToCategory">
+          <text>更多</text>
+          <image class="more-arrow" src="/images/arrow-gray.png" />
+        </view>
+      </view>
+      
+      <view class="resource-list">
+        <view 
+          class="resource-card" 
+          wx:for="{{resources}}" 
+          wx:key="_id"
+          bindtap="goToDetail"
+          data-id="{{item._id}}"
+        >
+          <!-- 封面图 -->
+          <view class="resource-cover">
+            <image class="cover-img" src="{{item.cover}}" mode="aspectFill" />
+            <view class="cover-tag">
+              <text>{{item.category}}</text>
+            </view>
+          </view>
+          
+          <!-- 资源信息 -->
+          <view class="resource-info">
+            <text class="resource-name">{{item.name}}</text>
+            <view class="resource-meta">
+              <view class="meta-item">
+                <image class="meta-icon" src="/images/download-count.png" />
+                <text>{{item.downloadCount > 10000 ? item.downloadCount/10000 + '万' : item.downloadCount}}</text>
+              </view>
+              <view class="meta-item">
+                <image class="meta-icon" src="/images/star.png" />
+                <text>{{item.rating}}</text>
+              </view>
+            </view>
+            <view class="resource-size">{{item.size}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+  </view>
+</view>

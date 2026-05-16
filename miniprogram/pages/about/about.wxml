@@ -1,0 +1,77 @@
+<!-- pages/about/about.wxml -->
+<view class="container">
+  <!-- 应用信息 -->
+  <view class="app-header">
+    <image class="app-logo" src="/images/logo.png" mode="aspectFit" />
+    <text class="app-name">{{appInfo.name}}</text>
+    <text class="app-version">V{{appInfo.version}}</text>
+  </view>
+
+  <!-- 应用简介 -->
+  <view class="section">
+    <text class="section-title">关于我们</text>
+    <view class="intro-card">
+      <text class="intro-desc">{{appInfo.description}}</text>
+    </view>
+  </view>
+
+  <!-- 功能特点 -->
+  <view class="section">
+    <text class="section-title">产品特点</text>
+    <view class="feature-grid">
+      <view wx:for="{{appInfo.features}}" wx:key="index" class="feature-item">
+        <view class="feature-icon-wrap">
+          <image wx:if="{{item.icon === 'download'}}" class="feature-icon" src="/images/feature-download.png" mode="aspectFit" />
+          <image wx:elif="{{item.icon === 'security'}}" class="feature-icon" src="/images/feature-security.png" mode="aspectFit" />
+          <image wx:elif="{{item.icon === 'free'}}" class="feature-icon" src="/images/feature-free.png" mode="aspectFit" />
+          <image wx:elif="{{item.icon === 'update'}}" class="feature-icon" src="/images/feature-update.png" mode="aspectFit" />
+        </view>
+        <text class="feature-title">{{item.title}}</text>
+        <text class="feature-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 联系方式 -->
+  <view class="section">
+    <text class="section-title">联系我们</text>
+    <view class="contact-list">
+      <view
+        wx:for="{{contactInfo}}"
+        wx:key="index"
+        class="contact-item"
+        data-text="{{item.value}}"
+        bindtap="copyText"
+      >
+        <text class="contact-label">{{item.label}}</text>
+        <view class="contact-value-wrap">
+          <text class="contact-value">{{item.value}}</text>
+          <text class="contact-action">点击复制</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 协议链接 -->
+  <view class="section">
+    <view class="link-list">
+      <view class="link-item" bindtap="viewAgreement">
+        <text class="link-text">用户协议</text>
+        <text class="link-arrow">›</text>
+      </view>
+      <view class="link-item" bindtap="viewPrivacy">
+        <text class="link-text">隐私政策</text>
+        <text class="link-arrow">›</text>
+      </view>
+      <view class="link-item" bindtap="checkUpdate">
+        <text class="link-text">检查更新</text>
+        <text class="link-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部版权 -->
+  <view class="footer">
+    <text class="copyright">© 2024 {{appInfo.name}} 版权所有</text>
+  </view>
+</view>

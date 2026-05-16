@@ -1,0 +1,182 @@
+/* app.wxss - 全局样式 */
+page {
+  --primary-color: #07c160;
+  --accent-color: #f0a020;
+  --info-color: #1565c0;
+  --bg-color: #f5f5f5;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  
+  background-color: var(--bg-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+/* 通用容器 */
+.container {
+  padding: 24rpx;
+  min-height: 100vh;
+}
+
+/* 卡片样式 */
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 按钮样式 */
+.btn-primary {
+  background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 44rpx;
+  padding: 24rpx 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 4rpx 16rpx rgba(7, 193, 96, 0.3);
+}
+
+.btn-primary::after {
+  border: none;
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, #f0a020 0%, #e6951a 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 44rpx;
+  padding: 24rpx 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 4rpx 16rpx rgba(240, 160, 32, 0.3);
+}
+
+.btn-accent::after {
+  border: none;
+}
+
+.btn-outline {
+  background: #ffffff;
+  color: var(--primary-color);
+  border: 2rpx solid var(--primary-color);
+  border-radius: 44rpx;
+  padding: 24rpx 48rpx;
+  font-size: 32rpx;
+}
+
+/* 标签样式 */
+.tag {
+  display: inline-block;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+}
+
+.tag-primary {
+  background: rgba(7, 193, 96, 0.1);
+  color: var(--primary-color);
+}
+
+.tag-accent {
+  background: rgba(240, 160, 32, 0.1);
+  color: var(--accent-color);
+}
+
+.tag-info {
+  background: rgba(21, 101, 192, 0.1);
+  color: var(--info-color);
+}
+
+/* Flex 工具类 */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 间距工具类 */
+.mt-10 { margin-top: 20rpx; }
+.mt-20 { margin-top: 40rpx; }
+.mt-30 { margin-top: 60rpx; }
+.mb-10 { margin-bottom: 20rpx; }
+.mb-20 { margin-bottom: 40rpx; }
+.mb-30 { margin-bottom: 60rpx; }
+
+/* 文字工具类 */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.text-accent { color: var(--accent-color); }
+.text-primary-color { color: var(--primary-color); }
+
+.text-center { text-align: center; }
+.text-bold { font-weight: 600; }
+
+.text-sm { font-size: 24rpx; }
+.text-md { font-size: 28rpx; }
+.text-lg { font-size: 32rpx; }
+.text-xl { font-size: 36rpx; }
+.text-2xl { font-size: 48rpx; }
+
+/* 弹性布局 */
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 60rpx;
+  color: var(--text-muted);
+}
+
+.empty-state image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 32rpx;
+  opacity: 0.5;
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx;
+  color: var(--text-muted);
+}
+
+/* 分隔线 */
+.divider {
+  height: 1rpx;
+  background: #eeeeee;
+  margin: 24rpx 0;
+}

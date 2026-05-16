@@ -1,0 +1,565 @@
+/* pages/signin/signin.wxss - 签到页样式 */
+
+.signin-page {
+  min-height: 100vh;
+  background: #f0f7f4;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 顶部区域 - 绿色渐变背景 */
+.header-bg {
+  background: linear-gradient(160deg, #07c160 0%, #06ad56 50%, #05a04d 100%);
+  border-radius: 0 0 48rpx 48rpx;
+  padding: 48rpx 32rpx 80rpx;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 连续签到天数 */
+.streak-section {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.streak-label {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 2rpx;
+}
+
+.streak-value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-top: 8rpx;
+}
+
+.streak-value {
+  font-size: 140rpx;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.15);
+}
+
+.streak-unit {
+  font-size: 44rpx;
+  color: rgba(255, 255, 255, 0.9);
+  margin-left: 12rpx;
+  font-weight: 500;
+}
+
+/* 签到状态卡片 */
+.status-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20rpx);
+  border-radius: 24rpx;
+  padding: 28rpx 32rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.status-card.signed {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.status-left {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.status-icon {
+  width: 72rpx;
+  height: 72rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-icon image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.status-tip {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 4rpx;
+}
+
+.status-badge {
+  width: 48rpx;
+  height: 48rpx;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-badge image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+/* 看广告卡片 */
+.ad-banner {
+  margin-top: 20rpx;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 24rpx 28rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ad-left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.ad-icon {
+  width: 64rpx;
+  height: 64rpx;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-icon image {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.ad-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ad-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.ad-tip {
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 4rpx;
+}
+
+.ad-btn {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  border-radius: 24rpx;
+  padding: 12rpx 24rpx;
+}
+
+.ad-btn text {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* 内容区域 */
+.content-section {
+  padding: 0 24rpx;
+  margin-top: -40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+/* 通用卡片样式 */
+.calendar-card,
+.rewards-card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  box-shadow: 0 4rpx 20rpx rgba(7, 193, 96, 0.08);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.card-tip {
+  font-size: 24rpx;
+  color: #07c160;
+  background: #e8f5e9;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+/* 周日历 */
+.week-calendar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.week-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.day-label {
+  font-size: 26rpx;
+  color: #999999;
+  font-weight: 500;
+}
+
+.day-circle {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.day-circle.signed {
+  background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+  box-shadow: 0 4rpx 12rpx rgba(7, 193, 96, 0.35);
+}
+
+.day-circle.today {
+  border: 2rpx dashed #cccccc;
+}
+
+.day-circle.signed.today {
+  border: none;
+}
+
+.day-circle image {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.today-dot {
+  width: 10rpx;
+  height: 10rpx;
+  background: #07c160;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 8rpx;
+}
+
+/* 奖励列表 */
+.rewards-list {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 28rpx;
+}
+
+.reward-item {
+  flex: 1;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+  padding: 20rpx 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  min-width: 0;
+}
+
+.reward-item.completed {
+  background: #e8f5e9;
+}
+
+.reward-day {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.reward-item.completed .reward-day {
+  color: #07c160;
+}
+
+.reward-icon {
+  width: 52rpx;
+  height: 52rpx;
+  background: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #999999;
+}
+
+.reward-item.completed .reward-icon {
+  background: #07c160;
+}
+
+.reward-icon image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.reward-value {
+  display: flex;
+  align-items: baseline;
+  gap: 2rpx;
+}
+
+.reward-value .value {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #333333;
+}
+
+.reward-item.completed .reward-value .value {
+  color: #07c160;
+}
+
+.reward-value .unit {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+/* 奖励说明 */
+.reward-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #eeeeee;
+}
+
+.tip-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.tip-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+}
+
+.tip-dot.level-1 { background: #07c160; }
+.tip-dot.level-2 { background: #f0a020; }
+.tip-dot.level-3 { background: #ff6b6b; }
+
+.tip-item text {
+  font-size: 26rpx;
+  color: #666666;
+}
+
+/* 签到按钮 */
+.action-section {
+  padding: 32rpx 24rpx;
+}
+
+.signin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  width: 100%;
+  padding: 36rpx;
+  background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+  border-radius: 48rpx;
+  border: none;
+  box-shadow: 0 8rpx 32rpx rgba(7, 193, 96, 0.35);
+}
+
+.signin-btn .btn-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.signin-btn text {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+}
+
+.signin-btn.disabled {
+  background: #e8e8e8;
+  box-shadow: none;
+}
+
+.signin-btn.disabled text {
+  color: #999999;
+}
+
+.signin-btn::after {
+  border: none;
+}
+
+/* 成功弹窗 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-modal {
+  width: 600rpx;
+  background: #ffffff;
+  border-radius: 32rpx;
+  overflow: hidden;
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+  padding: 56rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.success-icon-wrap {
+  width: 180rpx;
+  height: 180rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-icon {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.modal-body {
+  padding: 48rpx 40rpx;
+  text-align: center;
+}
+
+.success-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #333333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.success-subtitle {
+  font-size: 28rpx;
+  color: #666666;
+  display: block;
+  margin-bottom: 36rpx;
+}
+
+.reward-display {
+  background: #f0faf4;
+  border: 2rpx solid #07c160;
+  border-radius: 24rpx;
+  padding: 32rpx;
+}
+
+.reward-label {
+  font-size: 28rpx;
+  color: #666666;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.reward-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.reward-amount .plus {
+  font-size: 64rpx;
+  font-weight: 700;
+  color: #07c160;
+}
+
+.reward-amount .amount {
+  font-size: 80rpx;
+  font-weight: 800;
+  color: #07c160;
+}
+
+.reward-amount .unit {
+  font-size: 32rpx;
+  color: #333333;
+  margin-left: 8rpx;
+}
+
+.modal-footer {
+  padding: 0 40rpx 40rpx;
+}
+
+.modal-btn {
+  width: 100%;
+  padding: 32rpx;
+  border-radius: 48rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+  border: none;
+  background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+  color: #ffffff;
+}
+
+.modal-btn::after {
+  border: none;
+}

@@ -1,0 +1,122 @@
+<!-- pages/mine/mine.wxml - 我的页面 -->
+<view class="mine-page">
+  <!-- 顶部用户信息 -->
+  <view class="header-section">
+    <view class="header-bg">
+      <view class="user-card">
+        <!-- 未登录 -->
+        <view class="user-unlogin" wx:if="{{!userInfo}}">
+          <image class="avatar" src="/images/default-avatar.png" />
+          <view class="login-info">
+            <button class="login-btn" bindtap="getUserProfile">登录/注册</button>
+            <text class="login-tip">登录后可同步数据</text>
+          </view>
+        </view>
+        
+        <!-- 已登录 -->
+        <view class="user-info" wx:else>
+          <image class="avatar" src="{{userInfo.avatarUrl}}" />
+          <view class="user-detail">
+            <text class="nickname">{{userInfo.nickName}}</text>
+            <text class="user-level">VIP会员</text>
+          </view>
+        </view>
+
+        <!-- 刷新按钮 -->
+        <view class="refresh-btn" bindtap="refreshData">
+          <image src="/images/refresh.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="stats-section">
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-value">{{downloadCount}}</text>
+        <text class="stat-label">剩余次数</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{totalDownloaded}}</text>
+        <text class="stat-label">累计下载</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{signStreak}}</text>
+        <text class="stat-label">连续签到</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 广告次数提示 -->
+  <view class="ad-tip-section" wx:if="{{adWatchedToday > 0}}">
+    <view class="ad-tip-card">
+      <view class="tip-left">
+        <image src="/images/ad-small.png" />
+        <text>今日已观看 <text class="highlight">{{adWatchedToday}}</text>/10 次广告</text>
+      </view>
+      <view class="tip-right" wx:if="{{adWatchedToday < 10}}">
+        <text>还可以看 {{10 - adWatchedToday}} 次</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-card">
+      <view 
+        class="menu-item" 
+        wx:for="{{menuItems}}"
+        wx:key="id"
+        bindtap="navigateTo"
+        data-id="{{item.id}}"
+      >
+        <view class="menu-left">
+          <view class="menu-icon">
+            <image src="/images/{{item.icon}}.png" />
+          </view>
+          <text class="menu-name">{{item.name}}</text>
+        </view>
+        <image class="menu-arrow" src="/images/arrow-gray.png" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近下载 -->
+  <view class="history-section" wx:if="{{downloadHistory.length > 0}}">
+    <view class="history-card">
+      <view class="card-header">
+        <text class="header-title">最近下载</text>
+        <view class="more-btn" bindtap="navigateTo" data-id="download">
+          <text>查看全部</text>
+          <image src="/images/arrow-gray.png" />
+        </view>
+      </view>
+      
+      <view class="history-list">
+        <view class="history-item" wx:for="{{downloadHistory}}" wx:key="_id">
+          <image class="item-cover" src="{{item.cover}}" />
+          <view class="item-info">
+            <text class="item-name">{{item.name}}</text>
+            <text class="item-time">{{item.time}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="footer-section">
+    <button class="share-btn" open-type="share">
+      <image src="/images/share.png" />
+      <text>分享给好友</text>
+    </button>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>V1.0.0</text>
+  </view>
+</view>

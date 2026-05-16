@@ -1,0 +1,196 @@
+/* pages/download-history/download-history.wxss */
+
+/* 加载中 */
+.loading-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+}
+
+.loading {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #f0f0f0;
+  border-top-color: #07c160;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 下载记录列表 */
+.log-list {
+  padding: 0 30rpx;
+}
+
+/* 分组标题 */
+.log-group {
+  margin-bottom: 30rpx;
+}
+
+.group-header {
+  padding: 24rpx 0;
+}
+
+.group-date {
+  font-size: 28rpx;
+  color: #999;
+  font-weight: 500;
+}
+
+/* 下载项 */
+.log-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.log-item:last-child {
+  margin-bottom: 0;
+}
+
+.item-cover {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 12rpx;
+  background: #f5f5f5;
+  flex-shrink: 0;
+}
+
+.item-info {
+  flex: 1;
+  margin-left: 20rpx;
+  overflow: hidden;
+}
+
+.item-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.item-meta {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.item-category {
+  font-size: 22rpx;
+  color: #07c160;
+  background: #e8f8ed;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  margin-right: 16rpx;
+}
+
+.item-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.item-action {
+  flex-shrink: 0;
+  margin-left: 20rpx;
+}
+
+.action-icon {
+  font-size: 24rpx;
+  color: #07c160;
+  padding: 12rpx 20rpx;
+  background: #e8f8ed;
+  border-radius: 24rpx;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 30rpx;
+  color: #07c160;
+  font-size: 28rpx;
+  background: #fff;
+  margin: 20rpx 0;
+  border-radius: 16rpx;
+}
+
+.loading-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.loading-dot {
+  width: 12rpx;
+  height: 12rpx;
+  background: #07c160;
+  border-radius: 50%;
+  margin-right: 12rpx;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.no-more {
+  text-align: center;
+  padding: 30rpx;
+  color: #ccc;
+  font-size: 26rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 160rpx 0;
+}
+
+.empty-icon {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.empty-hint {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 16rpx;
+}
+
+.empty-btn {
+  margin-top: 40rpx;
+  padding: 20rpx 60rpx;
+  background: linear-gradient(135deg, #07c160, #06ad56);
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  border: none;
+}

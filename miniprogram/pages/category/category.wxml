@@ -1,0 +1,92 @@
+<!-- pages/category/category.wxml - 分类页 -->
+<view class="category-page">
+  <!-- 顶部搜索 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <image class="search-icon" src="/images/search.png" />
+      <input 
+        class="search-input" 
+        placeholder="搜索软件资源" 
+        value="{{keyword}}"
+        bindconfirm="onSearch"
+      />
+    </view>
+  </view>
+
+  <!-- 分类标签 -->
+  <scroll-view class="category-scroll" scroll-x enable-flex>
+    <view class="category-tabs">
+      <view 
+        class="category-tab {{item.active ? 'active' : ''}}" 
+        wx:for="{{categories}}" 
+        wx:key="id"
+        bindtap="switchCategory"
+        data-id="{{item.id}}"
+      >
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 排序选项 -->
+  <view class="sort-bar">
+    <view class="sort-left">
+      <text class="total-count">共 {{resources.length}} 个资源</text>
+    </view>
+    <view class="sort-right">
+      <view class="sort-item {{sortBy === 'downloadCount' ? 'active' : ''}}" bindtap="switchSort" data-sort="downloadCount">
+        <text>最多下载</text>
+      </view>
+      <view class="sort-item {{sortBy === 'rating' ? 'active' : ''}}" bindtap="switchSort" data-sort="rating">
+        <text>最高评分</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 资源列表 -->
+  <view class="resource-list">
+    <view 
+      class="resource-item" 
+      wx:for="{{resources}}" 
+      wx:key="_id"
+      bindtap="goToDetail"
+      data-id="{{item._id}}"
+    >
+      <view class="resource-cover">
+        <image src="{{item.cover}}" mode="aspectFill" />
+      </view>
+      <view class="resource-info">
+        <text class="resource-name">{{item.name}}</text>
+        <text class="resource-category">{{item.category}}</text>
+        <view class="resource-meta">
+          <view class="meta-item">
+            <image src="/images/download-gray.png" />
+            <text>{{item.downloadCountText}}</text>
+          </view>
+          <view class="meta-item">
+            <image src="/images/star.png" />
+            <text>{{item.rating}}</text>
+          </view>
+          <text class="resource-size">{{item.size}}</text>
+        </view>
+      </view>
+      <view class="download-btn">
+        <image src="/images/download-primary.png" />
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    <view class="no-more" wx:if="{{!hasMore && resources.length > 0}}">
+      <text>没有更多了</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && resources.length === 0}}">
+      <image src="/images/empty.png" />
+      <text>暂无相关资源</text>
+    </view>
+  </view>
+</view>
